@@ -9,6 +9,7 @@ class MainRowItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
+      heroTag: null,
         backgroundColor: Colors.red,
         onPressed: (){
           onTap() ;
