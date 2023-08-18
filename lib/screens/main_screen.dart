@@ -28,12 +28,20 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-
                     /* Dialog */
                     MainRowItem(
                         title: 'Show Dialog',
                         onTap: () {
                           showGetXDialog();
+                        }),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    /* Bottom sheet */
+                    MainRowItem(
+                        title: 'Show Bottom Sheet',
+                        onTap: () {
+                          showGetXBottomSheet();
                         }),
                   ],
                 ),
@@ -132,7 +140,7 @@ class MainScreen extends StatelessWidget {
       cancelTextColor: Colors.white,
       textConfirm: 'OK',
       confirmTextColor: Colors.white,
-      onCancel: () async{
+      onCancel: () async {
         Get.back();
         print('cancel clicked....');
       },
@@ -155,6 +163,45 @@ class MainScreen extends StatelessWidget {
       //   const Text('action 3' , style: TextStyle(color: Colors.limeAccent),) ,
       // ] ,
       // barrierDismissible: true ,
+    );
+  }
+
+  void showGetXBottomSheet(){
+    Get.bottomSheet(
+      Padding(
+        padding: const EdgeInsets.all(32),
+        child: Wrap(
+          direction: Axis.vertical,
+          children: [
+            const SizedBox(
+              height: 16,
+            ),
+            TextButton(onPressed: () {
+              Get.changeTheme(ThemeData.light()) ;
+            }, child: const Text('Light Theme')) ,
+            const SizedBox(
+              height: 16,
+            ),
+            TextButton(onPressed: () {
+              Get.changeTheme(ThemeData.dark()) ;
+            }, child: const Text('Dark Theme')) ,
+          ],
+        ),
+      ),
+      barrierColor: Colors.blueGrey.withOpacity(0.5) ,
+      backgroundColor: Colors.white.withOpacity(0.9) ,
+      isDismissible: true ,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(16) , topRight: Radius.circular(16)) ,
+        side: BorderSide(
+          color: Colors.black ,
+          style: BorderStyle.solid ,
+          width: 2
+        ) ,
+      ) ,
+      enableDrag: true ,
+
+
     );
   }
 }
