@@ -2,3 +2,38 @@ Flutter GetX--------------------------------------------------------------------
 ما همیشه میومدیم برای استفاده از ویجت های متریال از MaterialApp به عنوان روت استفاده میکردیم
 حالا میایم از GetMaterialApp استفاده میکنیم که مال لایبرری گت ایکس هستش
 در اصل یک ویجت هست که متریال اپ اصلی فرزندشه
+
+SnackBar--------------------------------------------------------------------------------------------
+titleText
+messageText
+این دو تا میتونن به جای تکست ساده ویجت بگیرن
+و اولویت این دو تا اتریبیوت از تایتل و مسیج دیفالت بالاتره
+
+colorText
+backgroundColor
+این دو تا روی تایتل و مسیج دیفالتش ست میشه
+
+borderWidth
+borderColor
+حتما برای دیده شدن رنگ بردر باید قبلش ویت بدید بهش
+
+animationDuration
+مدت زمان اجرای انیمیشن
+duration
+مدت زمانی که اسنک بار روی صفحه می ماند
+
+overlayBlur :
+صفحه پشت رو بلور میکنه
+
+forwardAnimationCurve
+reverseAnimationCurve
+یکیش انیمیشن ورود هست یکی خروج
+
+snackbarStatus :
+SnackbarStatus.OPENING
+SnackbarStatus.CLOSING
+SnackbarStatus.CLOSED
+SnackbarStatus.OPENING
+SnackbarStatus.OPEN
+SnackbarStatus.CLOSING
+SnackbarStatus.CLOSED
