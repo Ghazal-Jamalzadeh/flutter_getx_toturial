@@ -37,3 +37,9 @@ SnackbarStatus.OPENING
 SnackbarStatus.OPEN
 SnackbarStatus.CLOSING
 SnackbarStatus.CLOSED
+
+Dialog----------------------------------------------------------------------------------------------
+middleText
+Content
+کانتنت کاستومایز شده میدل تکست هست
+

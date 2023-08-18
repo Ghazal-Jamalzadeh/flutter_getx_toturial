@@ -25,6 +25,16 @@ class MainScreen extends StatelessWidget {
                         onTap: () {
                           showGetXToast();
                         }),
+                    const SizedBox(
+                      height: 16,
+                    ),
+
+                    /* Dialog */
+                    MainRowItem(
+                        title: 'Show Dialog',
+                        onTap: () {
+                          showGetXDialog();
+                        }),
                   ],
                 ),
               ),
@@ -91,5 +101,60 @@ class MainScreen extends StatelessWidget {
         snackbarStatus: (val) {
           print(val);
         });
+  }
+
+  void showGetXDialog() {
+    Get.defaultDialog(
+      title: 'Dialog Title',
+      titleStyle: const TextStyle(
+        color: Colors.white,
+      ),
+      middleText: 'Dialog content',
+      middleTextStyle: const TextStyle(color: Colors.lightGreen),
+      backgroundColor: Colors.black,
+      radius: 8,
+      content: Column(
+        children: const [
+          CircularProgressIndicator(
+            color: Colors.white,
+            strokeWidth: 3,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            'Loading',
+            style: TextStyle(color: Colors.red),
+          ),
+        ],
+      ),
+      textCancel: 'cancel',
+      cancelTextColor: Colors.white,
+      textConfirm: 'OK',
+      confirmTextColor: Colors.white,
+      onCancel: () async{
+        Get.back();
+        print('cancel clicked....');
+      },
+      onConfirm: () {
+        print('ok clicked...');
+      },
+      //color for default cancel & confirm button
+      buttonColor: Colors.red,
+
+      //customize the cancel & confirm button (override on defaults)
+      // cancel: const Text('Cancel' , style: TextStyle(color: Colors.limeAccent),) ,
+      // confirm: const Text('OK' , style: TextStyle(color: Colors.limeAccent),) ,
+
+      //  در ادامه دکمه های کنسل و کانفیرم قرار میگیرند برای آپشن های بیشتر
+      // actions: [
+      //   TextButton(onPressed: (){
+      //     Get.back() ;
+      //   } ,child: const Text('Close Dialog' , style: TextStyle(color: Colors.limeAccent),)) ,
+      //   const Text('action 2' , style: TextStyle(color: Colors.limeAccent),) ,
+      //   const Text('action 3' , style: TextStyle(color: Colors.limeAccent),) ,
+      // ] ,
+      // barrierDismissible: true ,
+    );
   }
 }
