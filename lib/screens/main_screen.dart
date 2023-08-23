@@ -4,7 +4,15 @@ import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
 import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+
+  //Reactive State Management
+  var count = 0.obs ;
+
+  MainScreen({Key? key}) : super(key: key);
+
+  void increment(){
+    count++;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +61,25 @@ class MainScreen extends StatelessWidget {
                         onTap: () {
                           navigateToHome();
                         }),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    /* Reactive State Management */
+                    MainRowItem(
+                        title: 'Reactive state management ++',
+                        onTap: () {
+                          increment() ;
+                        }),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(()=>Text('count value is $count'))
+                     ,
+
+
+
                   ],
+
                 ),
               ),
             ),
