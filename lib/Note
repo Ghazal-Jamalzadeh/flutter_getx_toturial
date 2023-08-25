@@ -128,3 +128,33 @@ class MyController extends GetxController
 برای دسترسی به کنترلر از UI از کد زیر استفاده میکنیم
  MyController myController = Get.put(MyController()) ;
 
+GetX<ControllerType>--------------------------------------------------------------------------------
+If init property is not used in GetX<TypeOfController>
+then create the instance of controller as follow
+MyController myController = Get.put(MyController()) ;
+
+حالا اگه بخوایم از روش دوم استفاده کنیم
+1-
+به جای obx باید از روش زیر استفاده کنیم
+  GetX<MyController>(
+ init: myController,
+ builder: (controller) =>
+ Text('controller2 value is ${controller.count}') )
+
+ توی init میاد initialize میکنه اون کنترلر رو
+ و توی builder میاد یک instance از کنترلر  رو برمیگردونه
+
+ 2-
+ برای صدا زدن متد به جای روش زیر
+myController.convertToUpperCase() ;
+از این روش استفاده میکنیم
+Get.find<MyController>().increment() ;
+با استفاده از کد بالا instance ي که از کنترلر ساختیم رو دریافت میکنیم
+
+نکته:
+اگر از اون init استفاده نکنیم باید به روش
+MyController myController = Get.put(MyController()) ;
+مقداردهی کنیم کنترلر رو
+Get.find<MyController>().increment() ;
+و اینجوری استفاده کنیم
+

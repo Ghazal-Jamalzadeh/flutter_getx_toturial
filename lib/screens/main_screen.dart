@@ -18,8 +18,10 @@ class MainScreen extends StatelessWidget {
   var student = Student();
   var student2 = Student2(name: 'Matt' , age: 37).obs;
 
-  //GetxController
+  //Getx Controller
   MyController myController = Get.put(MyController()) ;
+
+  //GetX <ControllerType>
 
 
   MainScreen({Key? key}) : super(key: key);
@@ -89,6 +91,8 @@ class MainScreen extends StatelessWidget {
                           });
                           /* GetX Controller */
                           myController.convertToUpperCase() ;
+                          /* GetX<ControllerType> */
+                          Get.find<MyController>().increment() ;
 
                         }),
                     const SizedBox(
@@ -126,6 +130,13 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
+                    /* GetX<ControllerType> */
+                    GetX<MyController>(
+                        init: myController,
+                        builder: (controller) =>
+                        Text('controller2 count is ${controller.count}') )
+                  ,
+
                   ],
                 ),
               ),
