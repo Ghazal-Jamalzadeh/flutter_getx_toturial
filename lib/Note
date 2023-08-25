@@ -78,3 +78,38 @@ final myMap = Rx<Map<String, int>>({});
 
 //Custom classes - it can be any class, literally
 final user = Rx<User>();
+
+Reactive State Manager Using Obx and User Defined class---------------------------------------------
+Classes can be made observable by making individuals variables Rx
+or by making the entire class observable
+
+class Student{
+  var name = "Tom".obs() ;
+  var age = 25.obs() ;
+}
+
+To make the entire class observable
+var name ;
+var age ;
+Student({this.name , this.age});
+.
+.
+.
+final student = Student(name:"Tom" , age:25).obs ;
+
+Bug?-------------------------------------------
+به دلیل نامشخصی وقتی با .obs تعریف میکنیم متغیر رو
+خیلی وقتا تو آپدیت کردن value به مشکل میخوره مخصوصا داخل کلاس
+var name = RxString('poop');
+خیلی روش بهتریه و اون مشکل رو نداره
+
+====================================================
+To update the widget which uses Rx :
+
+1- if individual variable is observable :
+student.name = student.name.toUpperCase() ;
+
+2- if entire class is observable  :
+ student2.update((val) {
+     val!.name = val.name.toUpperCase() ;
+                       });

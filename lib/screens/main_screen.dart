@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
 import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
-
   //Reactive State Management
-  var count = 0.obs ;
+  var count = 0.obs;
+
+  var count2 = 0.obs;
+
+  var name = RxString('poop');
+  var name2 = 'john'.obs;
+
+  //Reactive State Manager Using Obx and User Defined class
+  var student = Student();
+  var student2 = Student2(name: 'Matt' , age: 37).obs;
 
   MainScreen({Key? key}) : super(key: key);
 
-  void increment(){
+  void increment() {
     count++;
   }
 
@@ -68,18 +77,44 @@ class MainScreen extends StatelessWidget {
                     MainRowItem(
                         title: 'Reactive state management ++',
                         onTap: () {
-                          increment() ;
+                          count++;
+                          count2.value = 100;
+                          name.value = name.value.toUpperCase();
+                          name2.value = name2.value.toUpperCase();
+                          /*Reactive State Manager Using Obx and User Defined class */
+                          student.name.value = student.name.value.toString().toUpperCase();
+                          student2.update((std) {
+                            std!.name = std.name.toString().toUpperCase() ;
+                          });
                         }),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(()=>Text('count value is $count'))
-                     ,
-
-
-
+                    Obx(() => Text('count value is $count')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('count2 value is ${count2.value}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('name1 value is ${name.value}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('name2 value is ${name2.value}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('student name value is ${student.name.value}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('student name value is ${student2.value.name}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
                   ],
-
                 ),
               ),
             ),
@@ -269,9 +304,8 @@ class MainScreen extends StatelessWidget {
     // Get.to( ()=> const HomeScreen() , arguments: "data from main" ) ;
 
     //Go to next screen and receive data sent from home screen
-    var data = await Get.to(()=> const HomeScreen() , arguments: "data from main") ;
-    print('the received data is $data ') ;
-
-
+    var data =
+        await Get.to(() => const HomeScreen(), arguments: "data from main");
+    print('the received data is $data ');
   }
 }
