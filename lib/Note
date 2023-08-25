@@ -113,3 +113,18 @@ student.name = student.name.toUpperCase() ;
  student2.update((val) {
      val!.name = val.name.toUpperCase() ;
                        });
+
+GetX Controller-------------------------------------------------------------------------------------
+توی بخش قبلی کد مربوط به UI & business logic روی توی یک فایل مینوشتیم که کار اصولی ای نیست
+توی این بخش یاد میگیریم چطور این دو بخش رو از هم جدا کنیم با استفاده از کنتترلر گت ایکس
+
+1-
+به این منظور یک کلاس میسازیم که از GetxController ارث بری می کند
+class MyController extends GetxController
+ و عملیاتمون رو داخل این کلاس انجام میدیم
+ یعنی هر آنچه قبلا توی onTap مینوشتیم حالا اینجا مینویسیم
+
+2-
+برای دسترسی به کنترلر از UI از کد زیر استفاده میکنیم
+ MyController myController = Get.put(MyController()) ;
+

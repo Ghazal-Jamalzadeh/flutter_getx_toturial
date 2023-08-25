@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_toturial/contollers/my_controller.dart';
 import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
@@ -17,11 +18,11 @@ class MainScreen extends StatelessWidget {
   var student = Student();
   var student2 = Student2(name: 'Matt' , age: 37).obs;
 
-  MainScreen({Key? key}) : super(key: key);
+  //GetxController
+  MyController myController = Get.put(MyController()) ;
 
-  void increment() {
-    count++;
-  }
+
+  MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +87,9 @@ class MainScreen extends StatelessWidget {
                           student2.update((std) {
                             std!.name = std.name.toString().toUpperCase() ;
                           });
+                          /* GetX Controller */
+                          myController.convertToUpperCase() ;
+
                         }),
                     const SizedBox(
                       height: 16,
@@ -111,6 +115,14 @@ class MainScreen extends StatelessWidget {
                       height: 16,
                     ),
                     Obx(() => Text('student name value is ${student2.value.name}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('controller value is ${myController.student.name}')),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text('controller2 value is ${myController.student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
