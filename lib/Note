@@ -164,3 +164,14 @@ GetBuilder<ControllerType>------------------------------------------------------
 میشه استفاده ش نکرد و به روش
 MyController myController = Get.put(MyController()) ;
 ساخت و دسترسی داشت به کنترلر
+
+Controller LifeCycle--------------------------------------------------------------------------------
+برای کار روی لایف سایکل کنترلر رو روش هست
+
+روش اول
+استفاده از این دو تا اتریبیوت توی بیلدر
+initState: (state) => myController.incrementNumberEvery5Seconds(),
+dispose: (state) => myController.cleanUpTask(),
+
+روش دوم و اصولی تر:
+اورراید کردن همین دو تا توی خود کنترلر

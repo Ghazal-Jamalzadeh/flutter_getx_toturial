@@ -18,6 +18,7 @@ class MyController extends GetxController {
     count++;
   }
 
+  //GetBuilder
   /*
    تو مثال ها قبلی متغیرها رو از نوع ذی اکتیو تعریف میکردیم
    در این روش اصلا نیازی نیست که متغیر از نوع ری اکتیو تعریف شود
@@ -27,5 +28,34 @@ class MyController extends GetxController {
   void incrementAge() {
     age++;
     update(); //will update the count on UI witch uses it
+  }
+
+  //Controller Life Cycle
+  int number = 0;
+
+  void incrementNumberEvery5Seconds() {
+    Future.delayed(const Duration(seconds: 5), () {
+      number++;
+      update();
+    });
+  }
+
+  void cleanUpTask() {
+    print('clean up task');
+  }
+
+  //better approach
+  @override
+  void onInit() {
+    print('init called ');
+    incrementNumberEvery5Seconds();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    print('close called');
+    cleanUpTask();
+    super.onClose();
   }
 }

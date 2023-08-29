@@ -144,7 +144,15 @@ class MainScreen extends StatelessWidget {
                       init: MyController(),
                         builder: (controller) {
                           return Text('GetBuilder<ControllerType> : ${controller.age}') ;
-                        },)
+                        },) ,
+                    /* Controller life cycle */
+                    GetBuilder<MyController>(
+                      // initState: (state) => myController.incrementNumberEvery5Seconds(),
+                      // dispose: (state) => myController.cleanUpTask(),
+                      builder: (controller) {
+                        return Text('Controller life cycle : ${controller.number}') ;
+                      },) ,
+
 
                   ],
                 ),
