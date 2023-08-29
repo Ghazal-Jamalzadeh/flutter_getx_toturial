@@ -176,4 +176,41 @@ dispose: (state) => myController.cleanUpTask(),
 روش دوم و اصولی تر:
 اورراید کردن همین دو تا توی خود کنترلر
 
-Unique Id-------------------------------------------------------------------------------------------
+Workers---------------------------------------------------------------------------------------------
+خروجی عملیات های ورکرها در لاگ
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 51
+I/flutter (11271): everAll : 51
+I/flutter (11271): once : 51 // فقط همین یک بار این لاگ رو میبینیم
+[GETX] Worker [once] called
+I/flutter (11271): debounce : 51
+I/flutter (11271): interval : 51
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 52
+I/flutter (11271): everAll : 52
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 53
+I/flutter (11271): everAll : 53
+I/flutter (11271): interval : 53 // چون سه ثانیه گذشته
+I/flutter (11271): debounce : 53 // چون سه ثانیه گذشته
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 54
+I/flutter (11271): everAll : 54
+I/flutter (11271): debounce : 54
+I/flutter (11271): interval : 54
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 55
+I/flutter (11271): everAll : 55
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 56
+I/flutter (11271): everAll : 56
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 57
+I/flutter (11271): everAll : 57
+I/flutter (11271): user typed something...
+I/flutter (11271): ever : 58
+I/flutter (11271): everAll : 58
+I/flutter (11271): interval : 58
+I/flutter (11271): debounce : 58
+
+همونطور که مشخصه دیبانس و اینتروال توی هر ایپ کار نمیکنن و هر سه ثانیه یک بار هستن

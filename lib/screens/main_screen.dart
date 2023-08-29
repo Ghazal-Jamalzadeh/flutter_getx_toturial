@@ -98,6 +98,8 @@ class MainScreen extends StatelessWidget {
                           Get.find<MyController>().incrementAge() ;
                           /* Unique ID */
                           myController.incrementId() ;
+                          /* Workers */
+                          myController.incrementWorkerValue() ;
 
                         }),
                     const SizedBox(
@@ -149,8 +151,8 @@ class MainScreen extends StatelessWidget {
                         },) ,
                     /* Controller life cycle */
                     GetBuilder<MyController>(
-                      // initState: (state) => myController.incrementNumberEvery5Seconds(),
-                      // dispose: (state) => myController.cleanUpTask(),
+                      initState: (state) => myController.incrementNumberEvery5Seconds(),
+                      dispose: (state) => myController.cleanUpTask(),
                       builder: (controller) {
                         return Text('Controller life cycle : ${controller.number}') ;
                       },) ,
@@ -164,6 +166,10 @@ class MainScreen extends StatelessWidget {
                       builder: (controller) {
                         return Text('Unique id 2: ${controller.id}') ;
                       },) ,
+                    TextField(onChanged: (value) {
+                      print('user typed something...') ;
+                      myController.incrementWorkerValue() ;
+                    },)
 
 
 
