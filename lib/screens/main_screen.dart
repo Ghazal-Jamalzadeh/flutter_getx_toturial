@@ -93,6 +93,9 @@ class MainScreen extends StatelessWidget {
                           myController.convertToUpperCase() ;
                           /* GetX<ControllerType> */
                           Get.find<MyController>().increment() ;
+                          /* GetBuilder<ControllerType> */
+                          // myController.incrementAge(); // correct
+                          Get.find<MyController>().incrementAge() ;
 
                         }),
                     const SizedBox(
@@ -106,19 +109,19 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Reactive State Management (RxString) & .value : ${name.value}')),
+                    Obx(() => Text('RxString & .value : ${name.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Reactive State Management (obs) & .value : ${name2.value}')),
+                    Obx(() => Text('.obs & .value : ${name2.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Obx and User Defined class & .value : ${student.name.value}')),
+                    Obx(() => Text('User Defined class & .value : ${student.name.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Obx and User Defined class.obs & update : ${student2.value.name}')),
+                    Obx(() => Text('User Defined class.obs & update : ${student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
@@ -136,6 +139,12 @@ class MainScreen extends StatelessWidget {
                         builder: (controller) =>
                         Text('GetX<ControllerType> : ${controller.count}') )
                   ,
+                    /* GetBuilder<ControllerType> */
+                    GetBuilder<MyController>(
+                      init: MyController(),
+                        builder: (controller) {
+                          return Text('GetBuilder<ControllerType> : ${controller.age}') ;
+                        },)
 
                   ],
                 ),

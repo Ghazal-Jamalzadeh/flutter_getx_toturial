@@ -159,4 +159,8 @@ Get.find<MyController>().increment() ;
 و اینجوری استفاده کنیم
 
 GetBuilder<ControllerType>--------------------------------------------------------------------------
-از
+توی این دو تا روشی که از اتریبیوت init استفاده کردیم
+چون init اجباری نیست
+میشه استفاده ش نکرد و به روش
+MyController myController = Get.put(MyController()) ;
+ساخت و دسترسی داشت به کنترلر
