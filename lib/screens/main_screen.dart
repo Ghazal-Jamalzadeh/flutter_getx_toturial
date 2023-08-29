@@ -98,43 +98,43 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('count value is $count')),
+                    Obx(() => Text('count++ : $count')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('count2 value is ${count2.value}')),
+                    Obx(() => Text('count.value : ${count2.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('name1 value is ${name.value}')),
+                    Obx(() => Text('Reactive State Management (RxString) & .value : ${name.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('name2 value is ${name2.value}')),
+                    Obx(() => Text('Reactive State Management (obs) & .value : ${name2.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('student name value is ${student.name.value}')),
+                    Obx(() => Text('Obx and User Defined class & .value : ${student.name.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('student name value is ${student2.value.name}')),
+                    Obx(() => Text('Obx and User Defined class.obs & update : ${student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('controller value is ${myController.student.name}')),
+                    Obx(() => Text('Getx Controller : ${myController.student.name}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('controller2 value is ${myController.student2.value.name}')),
+                    Obx(() => Text('Getx Controller : ${myController.student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
                     /* GetX<ControllerType> */
                     GetX<MyController>(
-                        init: myController,
+                        init: MyController(),
                         builder: (controller) =>
-                        Text('controller2 count is ${controller.count}') )
+                        Text('GetX<ControllerType> : ${controller.count}') )
                   ,
 
                   ],
