@@ -58,4 +58,13 @@ class MyController extends GetxController {
     cleanUpTask();
     super.onClose();
   }
+
+  // Unique id
+  int id = 1000;
+
+  void incrementId() {
+    id++;
+    update(["myUniqueId"]);
+    /*نکته : الان چون آپدیت های دیگری هم توی صفحه هست همه مقادیر آپدیت میشن ولی اگه بقیه رو کامنت کنیم فقط آیدی مورد نظر آپدیت میشه*/
+  }
 }

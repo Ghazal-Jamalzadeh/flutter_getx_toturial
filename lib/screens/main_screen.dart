@@ -96,6 +96,8 @@ class MainScreen extends StatelessWidget {
                           /* GetBuilder<ControllerType> */
                           // myController.incrementAge(); // correct
                           Get.find<MyController>().incrementAge() ;
+                          /* Unique ID */
+                          myController.incrementId() ;
 
                         }),
                     const SizedBox(
@@ -152,6 +154,17 @@ class MainScreen extends StatelessWidget {
                       builder: (controller) {
                         return Text('Controller life cycle : ${controller.number}') ;
                       },) ,
+                    /* unique  id */
+                    GetBuilder<MyController>(
+                      id: 'myUniqueId',
+                      builder: (controller) {
+                        return Text('Unique id 1: ${controller.id}') ;
+                      },) ,
+                    GetBuilder<MyController>(
+                      builder: (controller) {
+                        return Text('Unique id 2: ${controller.id}') ;
+                      },) ,
+
 
 
                   ],
