@@ -5,6 +5,8 @@ import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
 import 'package:get/get.dart';
 
+import '../models/Messages.dart';
+
 class MainScreen extends StatelessWidget {
   //Reactive State Management
   var count = 0.obs;
@@ -16,19 +18,26 @@ class MainScreen extends StatelessWidget {
 
   //Reactive State Manager Using Obx and User Defined class
   var student = Student();
-  var student2 = Student2(name: 'Matt' , age: 37).obs;
+  var student2 = Student2(name: 'Matt', age: 37).obs;
 
   //Getx Controller
-  MyController myController = Get.put(MyController()) ;
+  MyController myController = Get.put(MyController());
 
   //GetX <ControllerType>
-
 
   MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      /* Localization */
+      translations: Messages(),
+      // your translation
+      locale: Locale('en', 'US'),
+      // default locale // to get device locale Get.deviceLocale
+      fallbackLocale: Locale('en', 'US'),
+      //fallback locale if wrong locale found
+
       home: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -85,22 +94,22 @@ class MainScreen extends StatelessWidget {
                           name.value = name.value.toUpperCase();
                           name2.value = name2.value.toUpperCase();
                           /*Reactive State Manager Using Obx and User Defined class */
-                          student.name.value = student.name.value.toString().toUpperCase();
+                          student.name.value =
+                              student.name.value.toString().toUpperCase();
                           student2.update((std) {
-                            std!.name = std.name.toString().toUpperCase() ;
+                            std!.name = std.name.toString().toUpperCase();
                           });
                           /* GetX Controller */
-                          myController.convertToUpperCase() ;
+                          myController.convertToUpperCase();
                           /* GetX<ControllerType> */
-                          Get.find<MyController>().increment() ;
+                          Get.find<MyController>().increment();
                           /* GetBuilder<ControllerType> */
                           // myController.incrementAge(); // correct
-                          Get.find<MyController>().incrementAge() ;
+                          Get.find<MyController>().incrementAge();
                           /* Unique ID */
-                          myController.incrementId() ;
+                          myController.incrementId();
                           /* Workers */
-                          myController.incrementWorkerValue() ;
-
+                          myController.incrementWorkerValue();
                         }),
                     const SizedBox(
                       height: 16,
@@ -121,19 +130,23 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('User Defined class & .value : ${student.name.value}')),
+                    Obx(() => Text(
+                        'User Defined class & .value : ${student.name.value}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('User Defined class.obs & update : ${student2.value.name}')),
+                    Obx(() => Text(
+                        'User Defined class.obs & update : ${student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Getx Controller : ${myController.student.name}')),
+                    Obx(() =>
+                        Text('Getx Controller : ${myController.student.name}')),
                     const SizedBox(
                       height: 16,
                     ),
-                    Obx(() => Text('Getx Controller : ${myController.student2.value.name}')),
+                    Obx(() => Text(
+                        'Getx Controller : ${myController.student2.value.name}')),
                     const SizedBox(
                       height: 16,
                     ),
@@ -141,38 +154,65 @@ class MainScreen extends StatelessWidget {
                     GetX<MyController>(
                         init: MyController(),
                         builder: (controller) =>
-                        Text('GetX<ControllerType> : ${controller.count}') )
-                  ,
+                            Text('GetX<ControllerType> : ${controller.count}')),
                     /* GetBuilder<ControllerType> */
                     GetBuilder<MyController>(
                       init: MyController(),
-                        builder: (controller) {
-                          return Text('GetBuilder<ControllerType> : ${controller.age}') ;
-                        },) ,
+                      builder: (controller) {
+                        return Text(
+                            'GetBuilder<ControllerType> : ${controller.age}');
+                      },
+                    ),
                     /* Controller life cycle */
                     GetBuilder<MyController>(
-                      initState: (state) => myController.incrementNumberEvery5Seconds(),
+                      initState: (state) =>
+                          myController.incrementNumberEvery5Seconds(),
                       dispose: (state) => myController.cleanUpTask(),
                       builder: (controller) {
-                        return Text('Controller life cycle : ${controller.number}') ;
-                      },) ,
+                        return Text(
+                            'Controller life cycle : ${controller.number}');
+                      },
+                    ),
                     /* unique  id */
                     GetBuilder<MyController>(
                       id: 'myUniqueId',
                       builder: (controller) {
-                        return Text('Unique id 1: ${controller.id}') ;
-                      },) ,
+                        return Text('Unique id 1: ${controller.id}');
+                      },
+                    ),
                     GetBuilder<MyController>(
                       builder: (controller) {
-                        return Text('Unique id 2: ${controller.id}') ;
-                      },) ,
-                    TextField(onChanged: (value) {
-                      print('user typed something...') ;
-                      myController.incrementWorkerValue() ;
-                    },)
-
-
-
+                        return Text('Unique id 2: ${controller.id}');
+                      },
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        print('user typed something...');
+                        myController.incrementWorkerValue();
+                      },
+                    ),
+                    /* Localization */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MainRowItem(
+                            title: 'En',
+                            onTap: () {
+                              myController.changeLanguage('en', '');
+                            }),
+                        MainRowItem(
+                            title: 'Fa',
+                            onTap: () {
+                              myController.changeLanguage('fa', '');
+                            }),
+                        MainRowItem(
+                            title: 'Fr',
+                            onTap: () {
+                              myController.changeLanguage('fr', '');
+                            }),
+                      ],
+                    ),
+                    Text('hello'.tr),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:get/get.dart';
 
@@ -100,11 +102,12 @@ class MyController extends GetxController {
     //the maximum he would get in 1 minute would be 20 coins
     //clicking 300 or 1 million times
     interval(workerValue, (callback) => print('interval : $workerValue') , time: const Duration(seconds: 3)) ;
-
-
-
-
-
     super.onInit();
   }
+
+  //Localization
+void changeLanguage(var param1 , var param2){
+    var locale = Locale(param1) ;
+    Get.updateLocale(locale) ;
+}
 }

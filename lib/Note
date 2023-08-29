@@ -214,3 +214,22 @@ I/flutter (11271): interval : 58
 I/flutter (11271): debounce : 58
 
 همونطور که مشخصه دیبانس و اینتروال توی هر ایپ کار نمیکنن و هر سه ثانیه یک بار هستن
+
+Localization----------------------------------------------------------------------------------------
+1-
+کلاس Messages رو تعریف میکنیم که از Translations ارث بری میکنه و
+یک متدی داره که باید اورراید کنیم و در قالب مپ برمیگردونه موارد رو
+
+2-
+داخل صفحه توی GetMaterialApp که ریشه درخ ماست
+اتریبیو های زیر رو استفاده میکنیم
+      translations: Messages(), // your translation
+      locale: Locale('en', 'US'), // default locale // to get device locale Get.deviceLocale
+      fallbackLocale: Locale('en', 'US'), //fallback locale if wrong locale found
+
+3-
+توی تکست ویویی که میخوایم تکست رو نمایش بدیم
+'hello'.tr
+که hello همون کلید ماست توی Messages
+و .tr رو هم به تهش باید اضافه کنیم
+
