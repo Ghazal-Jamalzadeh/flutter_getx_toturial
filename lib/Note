@@ -233,3 +233,44 @@ Localization--------------------------------------------------------------------
 که hello همون کلید ماست توی Messages
 و .tr رو هم به تهش باید اضافه کنیم
 
+Dependency Injection--------------------------------------------------------------------------------
+Get.put-------------------------------------
+My controller instance will be created even if it is not used
+tag will be used to find the instance with tag name (by default it is false)
+controller disposed when it is not used
+but if permanent is true the instance will be alive throughout the app
+
+MyController myController1 = Get.put(MyController() , tag: 'instance1' , permanent: true) ;
+
+Logs:
+[GETX] Instance "MyController" has been created with tag "instance1"
+[GETX] Instance "MyController" with tag "instance1" has been initialized
+
+//instance will be created with tag
+Get.find<MyController>(tag: 'instance1') ;
+
+Get.lazyPut----------------------------------------------
+Instance will be created when it is used
+fenix is similar to permanent, the difference is that the instance is discarded when is not being used,
+but when it's use is needed again, get will recreate the instance (false by default)
+
+will inject that dependency, and wait until it's used then it will call onInit() method, then onReady() method
+
+final myController2 = Get.lazyPut(() => MyController() , tag : 'instance2' , fenix: true);
+
+
+توی لیزی حافظه تا زمان استفاده کردنش بهش اختصاص داده نمیشه
+یعنی مثلا تا زمانی که به خط کد زیر برسیم
+Get.find<MyController>() ;
+
+Get.create--------------------------------------------
+Here permanent will be true by default and isSingleton is false
+final myController3 = Get.create(() => MyController() , tag: 'instance3') ;
+
+توی put & lazyPut نکته ای که هست اینه که isSingleton true هست
+ولی توی create این false هست که به این معنی هست که multiple instance can be created
+
+Get.putAsync------------------------------------------
+برای زمانی که با عملیات های async سرکار داریم
+final myController4 = Get.lazyPut(() async => await MyController()) ;
+(من عملیات async رو هم با همون معمولیا پیش بردم چون این ارور میداد ولی اونا نه!)

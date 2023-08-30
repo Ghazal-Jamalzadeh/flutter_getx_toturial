@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyController extends GetxController {
   var count = 0.obs;
@@ -80,18 +81,18 @@ class MyController extends GetxController {
   /* بهترین جا برای استفاده از ورکرها داخل متدهای onInit خود کنترلر هست */
   @override
   void onInit() {
-
     //called every time when the value of count variable changes
-    ever(workerValue, (callback) => print('ever : $workerValue')) ;
+    ever(workerValue, (callback) => print('ever : $workerValue'));
 
     //called every time when the value of any variable changes
-    everAll([workerValue], (callback) => print('everAll : $workerValue')) ;
+    everAll([workerValue], (callback) => print('everAll : $workerValue'));
 
     //called only once when the variable value changes
-    once(workerValue, (callback) => print('once : $workerValue')) ;
+    once(workerValue, (callback) => print('once : $workerValue'));
 
     //called every time the user stops typing for 3 second
-    debounce(workerValue, (callback) => print('debounce : $workerValue') , time: const Duration(seconds: 3)) ;
+    debounce(workerValue, (callback) => print('debounce : $workerValue'),
+        time: const Duration(seconds: 3));
 
     //ignore all changes within 3 seconds
     //imagine that the user can earn coins by clicking on something
@@ -101,13 +102,22 @@ class MyController extends GetxController {
     //and even then clicking 300 or a thousand times
     //the maximum he would get in 1 minute would be 20 coins
     //clicking 300 or 1 million times
-    interval(workerValue, (callback) => print('interval : $workerValue') , time: const Duration(seconds: 3)) ;
+    interval(workerValue, (callback) => print('interval : $workerValue'),
+        time: const Duration(seconds: 3));
     super.onInit();
   }
 
   //Localization
-void changeLanguage(var param1 , var param2){
-    var locale = Locale(param1) ;
-    Get.updateLocale(locale) ;
-}
+  void changeLanguage(var param1, var param2) {
+    var locale = Locale(param1);
+    Get.updateLocale(locale);
+  }
+
+//Dependency Injection
+  void incrementCounter() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    int counter = (preferences.getInt('counter') ?? 0) + 1;
+    print('pressed counter $counter times ');
+    await preferences.setInt('counter', counter);
+  }
 }

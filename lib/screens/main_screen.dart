@@ -23,7 +23,12 @@ class MainScreen extends StatelessWidget {
   //Getx Controller
   MyController myController = Get.put(MyController());
 
-  //GetX <ControllerType>
+  //Dependency Injection
+  MyController myController1 = Get.put(MyController() , tag: 'instance1' , permanent: true) ;
+  final myController2 = Get.lazyPut(() => MyController() , tag : 'instance2' , fenix: true);
+  final myController3 = Get.create(() => MyController() , tag: 'instance3') ;
+  final myController4 = Get.lazyPut(() async => MyController() , tag: 'instance4') ;
+
 
   MainScreen({Key? key}) : super(key: key);
 
@@ -213,9 +218,18 @@ class MainScreen extends StatelessWidget {
                       ],
                     ),
                     Text('hello'.tr),
+                    MainRowItem(
+                        title: 'Dependency Injection',
+                        onTap: () {
+                          // instance will be created with tag
+                          Get.find<MyController>(tag: 'instance1') ;
+                          Get.find<MyController>() ;
+                          Get.find<MyController>().incrementCounter() ;
+                        }),
                   ],
                 ),
               ),
+
             ),
           ),
         ),
