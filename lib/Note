@@ -273,4 +273,44 @@ final myController3 = Get.create(() => MyController() , tag: 'instance3') ;
 Get.putAsync------------------------------------------
 برای زمانی که با عملیات های async سرکار داریم
 final myController4 = Get.lazyPut(() async => await MyController()) ;
-(من عملیات async رو هم با همون معمولیا پیش بردم چون این ارور میداد ولی اونا نه!)
+
+GetX Services---------------------------------------------------------------------------------------
+Till now we have returned business logic inside the getX controller
+and we know that the controller is automatically remove from the memory when it is not used
+but suppose we want some functionalities that should be available till the app is alive
+in that particular case we can not write business logic inside the controller
+because when the controller is not used it will be removed from the memory by the getX system
+but now we want the functionalities will be available till the app is alive
+in that case we write the business logic inside the GetX services
+
+The getX service is similar the getX controller with the same life cycle methods
+like onInit - onReady - onClose
+The only difference is that the getX service notifies the getX dependency injection system
+that it should not be removed from the memory
+The only way to remove the service from the memory is to close the app or call get.reset
+
+1- init
+قبلا main به این شکل بود
+void main() {
+  runApp(const MyApp());
+}
+
+حالا به این شکله
+Future<void> main() async {
+  await initServices() ;
+  runApp(const MyApp());
+}
+
+Future<void> initServices() async{
+  print('starting services...')  ;
+  await Get.putAsync<MyService>(() async => await MyService());
+  print('all services stated...')  ;
+}
+
+2-
+کلاس MyService رو می سازیم که از GetxService ارث بری میکنه
+
+3-
+برای استفاده
+Get.find<MyService>().incrementCounter() ;
+

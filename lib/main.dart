@@ -1,9 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_toturial/contollers/my_service.dart';
+import 'package:get/get.dart';
 
 import 'screens/main_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await initServices() ;
   runApp(const MyApp());
+}
+
+Future<void> initServices() async{
+  print('starting services...')  ;
+  await Get.putAsync<MyService>(() async => await MyService());
+  print('all services stated...')  ;
 }
 
 class MyApp extends StatelessWidget {

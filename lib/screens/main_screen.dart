@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_toturial/contollers/my_controller.dart';
+import 'package:flutter_getx_toturial/contollers/my_service.dart';
 import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
@@ -27,7 +30,7 @@ class MainScreen extends StatelessWidget {
   MyController myController1 = Get.put(MyController() , tag: 'instance1' , permanent: true) ;
   final myController2 = Get.lazyPut(() => MyController() , tag : 'instance2' , fenix: true);
   final myController3 = Get.create(() => MyController() , tag: 'instance3') ;
-  final myController4 = Get.lazyPut(() async => MyController() , tag: 'instance4') ;
+  final myController4 = Get.putAsync(() async => MyController() , tag: 'instance4') ;
 
 
   MainScreen({Key? key}) : super(key: key);
@@ -217,14 +220,25 @@ class MainScreen extends StatelessWidget {
                             }),
                       ],
                     ),
+                    const SizedBox(height: 16,) ,
+
                     Text('hello'.tr),
+                    const SizedBox(height: 16,) ,
+
                     MainRowItem(
                         title: 'Dependency Injection',
                         onTap: () {
                           // instance will be created with tag
                           Get.find<MyController>(tag: 'instance1') ;
                           Get.find<MyController>() ;
-                          Get.find<MyController>().incrementCounter() ;
+                          Get.find<MyController>(tag: 'instance4').incrementCounter() ;
+                        }),
+                    const SizedBox(height: 16,) ,
+
+                    MainRowItem(
+                        title: 'GetX Services',
+                        onTap: () {
+                          Get.find<MyService>().incrementCounter() ;
                         }),
                   ],
                 ),
