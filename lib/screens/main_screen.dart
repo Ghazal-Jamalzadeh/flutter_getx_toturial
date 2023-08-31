@@ -74,6 +74,10 @@ class MainScreen extends StatelessWidget {
             }))
       ],
 
+      //Smart management
+      // smartManagement: SmartManagement.full,
+      // smartManagement: SmartManagement.keepFactory,
+      // smartManagement: SmartManagement.onlyBuilder,
 
       home: Scaffold(
         body: SafeArea(

@@ -411,6 +411,7 @@ getPages: [
 
 2-
 بقیه ش عینا مثل Route Binding هس
+یک نکته ریز داره که توی Smart Management مورد سوم توضیح داده شده
 
 Init binding for normal routes------------------------------
 //for normal routes
@@ -423,6 +424,25 @@ GetX provides smart management
 that lets us configured how  dependencies behave in terms of memory management
 
 داخل GetMaterialApp یک اتریبیوت هست به اسم smartManagement
+که میتتونه مقادیر زیر رو بگیره
+      //Smart management
+      // smartManagement: SmartManagement.full,
+      // smartManagement: SmartManagement.keepFactory,
+      // smartManagement: SmartManagement.onlyBuilder,
 
-smartManagement: SmartManagement.full,
+Full Mode -------------------------------------------
+(This is the default value)
+Every thing gets disposed as soon as the route is removed from the navigation stack ,
+unless declared permanent
 
+Keep Factory ----------------------------------------
+Just like the SmartManagement.full, it will remove it's dependencies
+when 'it's not being used any more
+However, it will keep their factory,
+which means it will recreate the dependency if you  need that instance again
+
+Only Builder-----------------------------------------
+With this option, only controllers started in init : or loaded into a binding
+with Get.lazyPut will be disposed
+If you use Get.put or Get.putAsync or any other approach,
+smart management will not have permissions to exclude this dependency
