@@ -120,4 +120,12 @@ class MyController extends GetxController {
     print('pressed counter $counter times ');
     await preferences.setInt('counter', counter);
   }
+
+  //binding
+  var countBinding = 200.obs;
+  void incrementUsingBinding() {
+    countBinding++;
+  }
+
+
 }

@@ -1,13 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_toturial/contollers/all_controllers_binding.dart';
+import 'package:flutter_getx_toturial/contollers/home_contrroller.dart';
 import 'package:flutter_getx_toturial/contollers/my_controller.dart';
 import 'package:flutter_getx_toturial/contollers/my_service.dart';
 import 'package:flutter_getx_toturial/models/student.dart';
 import 'package:flutter_getx_toturial/screens/home_screen.dart';
+import 'package:flutter_getx_toturial/screens/second_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
 import 'package:get/get.dart';
 
+import '../contollers/second_controller_binding.dart';
 import '../models/Messages.dart';
 
 class MainScreen extends StatelessWidget {
@@ -27,11 +29,15 @@ class MainScreen extends StatelessWidget {
   MyController myController = Get.put(MyController());
 
   //Dependency Injection
-  MyController myController1 = Get.put(MyController() , tag: 'instance1' , permanent: true) ;
-  final myController2 = Get.lazyPut(() => MyController() , tag : 'instance2' , fenix: true);
-  final myController3 = Get.create(() => MyController() , tag: 'instance3') ;
-  final myController4 = Get.putAsync(() async => MyController() , tag: 'instance4') ;
+  MyController myController1 =
+      Get.put(MyController(), tag: 'instance1', permanent: true);
 
+  final myController2 =
+      Get.lazyPut(() => MyController(), tag: 'instance2', fenix: true);
+  final myController3 = Get.create(() => MyController(), tag: 'instance3');
+
+  final myController4 =
+      Get.putAsync(() async => MyController(), tag: 'instance4');
 
   MainScreen({Key? key}) : super(key: key);
 
@@ -45,6 +51,29 @@ class MainScreen extends StatelessWidget {
       // default locale // to get device locale Get.deviceLocale
       fallbackLocale: Locale('en', 'US'),
       //fallback locale if wrong locale found
+
+      //binding
+      //Initial :
+      // initialBinding: AllControllersBinding(),
+
+      //Route :
+      //If binding apply at root level
+      // getPages: [
+      //   GetPage(name: '/second', page: () => SecondScreen(), binding: SecondControllerBinding())
+      // ] ,
+
+      //Binding Builder :
+      //If we don't want to use separate binding class
+      getPages: [
+        GetPage(
+            name: '/second',
+            page: () => SecondScreen(),
+            binding: BindingsBuilder(() {
+              Get.lazyPut<SecondControllerBinding>(
+                  () => SecondControllerBinding());
+            }))
+      ],
+
 
       home: Scaffold(
         body: SafeArea(
@@ -220,30 +249,83 @@ class MainScreen extends StatelessWidget {
                             }),
                       ],
                     ),
-                    const SizedBox(height: 16,) ,
+                    const SizedBox(
+                      height: 16,
+                    ),
 
                     Text('hello'.tr),
-                    const SizedBox(height: 16,) ,
+                    const SizedBox(
+                      height: 16,
+                    ),
 
                     MainRowItem(
                         title: 'Dependency Injection',
                         onTap: () {
                           // instance will be created with tag
-                          Get.find<MyController>(tag: 'instance1') ;
-                          Get.find<MyController>() ;
-                          Get.find<MyController>(tag: 'instance4').incrementCounter() ;
+                          Get.find<MyController>(tag: 'instance1');
+                          Get.find<MyController>();
+                          Get.find<MyController>(tag: 'instance4')
+                              .incrementCounter();
                         }),
-                    const SizedBox(height: 16,) ,
+                    const SizedBox(
+                      height: 16,
+                    ),
 
+                    /* Services */
                     MainRowItem(
                         title: 'GetX Services',
                         onTap: () {
-                          Get.find<MyService>().incrementCounter() ;
+                          Get.find<MyService>().incrementCounter();
                         }),
+
+                    const SizedBox(
+                      height: 16,
+                    ),
+
+                    /* Binding */
+                    MainRowItem(
+                        title: 'increment Binding',
+                        onTap: () {
+                          //access through Initial and route binding
+                          Get.find<MyController>().incrementUsingBinding();
+                          //access through Initial binding
+                          // Get.find<HomeController>().incrementUsingBinding() ;
+                        }),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() => Text(
+                        'My Controller Binding : ${Get.find<MyController>().countBinding.value}')),
+
+                    //access through Initial binding
+                    // Obx(() => Text(
+                    //     'Home Controller Binding : ${Get.find<HomeController>().countHomeBinding.value}')),
+
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    MainRowItem(
+                        title: 'Binding Go To The Next Screen ',
+                        onTap: () {
+                          //Initial
+                          // Get.to(const SecondScreen()) ;
+
+                          //For named route
+                          Get.toNamed('/second');
+
+                          //for normal routes
+                          //if you  want to initialize the binding on that time
+                          //when you are calling the route
+                          // Get.to(SecondScreen() , binding: SecondControllerBinding()) ;
+
+                        }),
+
+                    const SizedBox(
+                      height: 16,
+                    ),
                   ],
                 ),
               ),
-
             ),
           ),
         ),

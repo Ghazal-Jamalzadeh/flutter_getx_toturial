@@ -314,3 +314,115 @@ Future<void> initServices() async{
 برای استفاده
 Get.find<MyService>().incrementCounter() ;
 
+Binding---------------------------------------------------------------------------------------------
+تا الان میومدیم بیزنس لاجیک رو داخل کنترلر مینوشتیم
+بعد یک اینستنس از اون کنترلر داخل ui میساختیم
+بعد از متغیرها و متدهای اون کنترلر استفاده میکردیم
+این باعث میشد که ui و کنترلر ما به هم وابسته؟ (Coupled) باشن
+چون کنترلر داخل ui ساخته میشه
+Now if we want to remove this type coupling, we use binding
+Then there is no need to create the controller instance inside our ui code
+
+Initial Binding------------------------------------------
+1-
+داخل ویجت GetMaterialApp میایم اترییوت زیر رو تعریف میکنیم
+initialBinding: AllControllersBinding(),
+
+2-
+کلاس مورد نظر رو با چهارچوب زیر میسازیم
+
+class AllControllersBinding implements Bindings {
+  @override
+  void dependencies() {
+
+  }
+
+}
+
+3-
+کنترلر هامون رو داخل این کلاس تعریف میکنیم
+
+4-
+This means for this particular property -> initialBinding: AllControllersBinding(),
+This class will be called -> AllControllersBinding
+And this two controllers will be initialized
+Now we are not initializing our controllers inside our ui code
+This means our ui code is decoupled with our controller instance
+
+5-
+میتونیم بین صفحات مختلف خیلی راحت یک کنترلر و متغیرهاش رو شیر کنیم
+دقیقا مثل کاربرد ویومدل و لایودیتا هست و فرگمنت
+مقادیر همه ثابت باقی میمونن توی جابه جایی بین صفحات
+
+Route Binding------------------------------------------
+1-
+یک روش دیگه به جای تعریف ui به شکل اینیشیال :
+initialBinding: AllControllersBinding(),
+تعریف کردنیش توی روت لول هست
+ //If binding apply at root level
+      getPages: [
+        GetPage(name: '/second', page: () => SecondScreen(), binding: SecondControllerBinding())
+      ],
+وقتی به این شکل تعریف میکنیم نیازی به تعریف کردنش به صورت اینیشیال نیست
+به این معنی هست که هر وقت این روت '/second' کال شد
+این بایندینگ اپلای میشه
+
+2-
+//For named route
+ Get.toNamed('/second') ;
+
+3-
+در این حالت اگه توی صفحه اول بخوام به کنترلرها دسترسی پیدا کنم ارور میگیرم
+چون طبیعتا هیچ جا تعریفشون نکردم
+برای حل این مشکل:
+
+4-
+این کلاس رو می سازیم
+class MyAppControllerBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<MyController>(() => MyController());
+  }
+}
+
+5-
+توی main قبل از ران اپ:
+ MyAppControllerBinding().dependencies() ;
+
+6-
+هر بار به یک صفحه ای وارد میشیم مقادیر ریست میشن
+به کنترل های مشترک دسترسی نداریم
+کنترلر هر صفحه قبل خودش تعریف میشه نه توی خودش
+وقتی بک میزنیم دیتای قبلی باقی میمونه
+ولی وقتی دوباره میریم توی صفحه دوم دیتای دوم ریست میشه باز
+چون تو هر بار جا به جایی بین صفحات ساخته میشه از اول
+
+Binding Builder-------------------------------------
+1-
+//Binding Builder :
+//If we don't want to use separate binding class
+getPages: [
+  GetPage(name: '/second', page: () => SecondScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<SecondControllerBinding>(() => SecondControllerBinding()) ;
+      }))
+] ,
+اگه بخوایم کنترلرهای بیشتری رو هم میتونیم داخل اون آکلاد اینیشیالایز کنیم
+
+2-
+بقیه ش عینا مثل Route Binding هس
+
+Init binding for normal routes------------------------------
+//for normal routes
+//if you  want to initialize the binding on that time
+//when you are calling the route
+// Get.to(SecondScreen() , binding: SecondControllerBinding()) ;
+
+Smart Management------------------------------------------------------------------------------------
+GetX provides smart management
+that lets us configured how  dependencies behave in terms of memory management
+
+داخل GetMaterialApp یک اتریبیوت هست به اسم smartManagement
+
+smartManagement: SmartManagement.full,
+

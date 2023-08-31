@@ -1,13 +1,16 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_toturial/contollers/my_app_controller_binding.dart';
 import 'package:flutter_getx_toturial/contollers/my_service.dart';
 import 'package:get/get.dart';
 
 import 'screens/main_screen.dart';
 
 Future<void> main() async {
+  //services
   await initServices() ;
+  //route binding
+  MyAppControllerBinding().dependencies() ;
   runApp(const MyApp());
 }
 
@@ -18,6 +21,7 @@ Future<void> initServices() async{
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   // This widget is the root of your application.
