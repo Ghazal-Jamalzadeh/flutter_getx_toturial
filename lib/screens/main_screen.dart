@@ -4,6 +4,7 @@ import 'package:flutter_getx_toturial/contollers/home_contrroller.dart';
 import 'package:flutter_getx_toturial/contollers/my_controller.dart';
 import 'package:flutter_getx_toturial/contollers/my_service.dart';
 import 'package:flutter_getx_toturial/models/student.dart';
+import 'package:flutter_getx_toturial/screens/get_view_example_screen.dart';
 import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/screens/second_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
@@ -371,7 +372,11 @@ class MainScreen extends StatelessWidget {
                       height: 16,
                     ),
 
-
+                    MainRowItem(
+                        title: 'Go To Get View Screen ',
+                        onTap: () {
+                          Get.to(GetViewExampleScreen()) ;
+                        }),
 
 
                   ],

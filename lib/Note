@@ -479,3 +479,28 @@ await GetStorage.init('myStorage') ; //initialize
 Get Validation--------------------------------------------------------------------------------------
 GetUtils.isEmail(emailController.text) ;
 ولیدیشن های مختلفی رو فراهم میکنه و کاربردیه
+
+GetView & GetWidget---------------------------------------------------------------------------------
+When to use?
+فرض کنید که ما یک ویو یا یک اسکرین داریم
+and this view or screen is depended on single controller
+Then instead of extending of stateless widget
+we can extend getView or getWidget
+getView and getWidget are similar
+but only small difference is?
+جلوتر توی مثال توضیح داده میشه
+
+GetView---------------------------------------
+It has a single controller as a dependency
+then we can use get view instead of stateless widget
+and avoid writing get.find
+
+GetWidget--------------------------------------
+It is similar to getView with one difference
+it gives the same instance of Get.find everytime
+it becomes very useful when used in combine with Get.create
+
+توضیحات تکمیلی توی GetViewExampleScreen به صورت کامنت نوشته شده
+
+پس زمانی از این getView & getWidget استفاده میکنیم
+که ویوی ما یا اسکرین ما به یک سینگل کنترلر وابستگی داره فقط
