@@ -43,12 +43,18 @@ class MainScreen extends StatelessWidget {
   //Get Storage
   final TextEditingController emailController = TextEditingController();
   var storage =  GetStorage() ;
+  void storageListener(){
+
+    storage.listen(() {print('email changed') ;}) ;
+    storage.listenKey('email', (value) { print('new email is $value') ; }) ;
+  }
 
 
   MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    storageListener() ;
     return GetMaterialApp(
       /* Localization */
       translations: Messages(),
@@ -85,7 +91,7 @@ class MainScreen extends StatelessWidget {
       // smartManagement: SmartManagement.keepFactory,
       // smartManagement: SmartManagement.onlyBuilder,
 
-      home: Scaffold(
+        home: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -364,6 +370,8 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
+
+
 
 
                   ],

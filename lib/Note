@@ -453,6 +453,29 @@ var storage =  GetStorage() ;
 storage.write("email", emailController.text) ;
 storage.read('email') ;
 
+It is used for persistent key/value storage
+Can store string, double , map and list
+
+To listen for changes:
+  var listen = storage.listen(() {print('email changed') ;}) ;
+  when subscribed to listen event it should be disposed by using
+  storage.removeListen(listen)  ;
+
+to listen for changes in key
+  storage.listenKey('email', (value) { print('new email is $value') ; }) ;
+
+remove a key:
+  storage.remove('email') ;
+
+erase the container:
+storage.erase() ;
+
+create container with a name:
+GetStorage g = GetStorage('myStorage')  ;
+await GetStorage.init('myStorage') ; //initialize
+
+
+
 Get Validation--------------------------------------------------------------------------------------
 GetUtils.isEmail(emailController.text) ;
 ولیدیشن های مختلفی رو فراهم میکنه و کاربردیه
