@@ -8,6 +8,7 @@ import 'package:flutter_getx_toturial/screens/home_screen.dart';
 import 'package:flutter_getx_toturial/screens/second_screen.dart';
 import 'package:flutter_getx_toturial/widgets/main_row_item.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../contollers/second_controller_binding.dart';
 import '../models/Messages.dart';
@@ -38,6 +39,11 @@ class MainScreen extends StatelessWidget {
 
   final myController4 =
       Get.putAsync(() async => MyController(), tag: 'instance4');
+
+  //Get Storage
+  final TextEditingController emailController = TextEditingController();
+  var storage =  GetStorage() ;
+
 
   MainScreen({Key? key}) : super(key: key);
 
@@ -327,6 +333,39 @@ class MainScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
+
+                    /* Get Storage */
+                    TextField(controller : emailController , decoration: const InputDecoration(labelText: 'Your Email')),
+
+                    const SizedBox(
+                      height: 16,
+                    ),
+
+                    Row(children: [
+
+                      MainRowItem(
+                          title: 'Write ',
+                          onTap: () {
+
+                            if(GetUtils.isEmail(emailController.text)){
+                            storage.write("email", emailController.text) ;
+                            }else{
+                              Get.snackbar('Invalid email', 'provide email in correct format ') ;
+                            }
+                          }),
+
+                      MainRowItem(
+                          title: 'Read ',
+                          onTap: () {
+                            Get.snackbar('Your Email Is:', storage.read('email')) ;
+                          }),
+                    ],) ,
+
+                    const SizedBox(
+                      height: 16,
+                    ),
+
+
                   ],
                 ),
               ),

@@ -446,3 +446,13 @@ With this option, only controllers started in init : or loaded into a binding
 with Get.lazyPut will be disposed
 If you use Get.put or Get.putAsync or any other approach,
 smart management will not have permissions to exclude this dependency
+
+Get Storage-----------------------------------------------------------------------------------------
+معادل shared pref
+var storage =  GetStorage() ;
+storage.write("email", emailController.text) ;
+storage.read('email') ;
+
+Get Validation--------------------------------------------------------------------------------------
+GetUtils.isEmail(emailController.text) ;
+ولیدیشن های مختلفی رو فراهم میکنه و کاربردیه
